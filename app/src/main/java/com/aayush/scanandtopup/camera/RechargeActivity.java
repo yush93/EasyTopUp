@@ -47,23 +47,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/*
-*Created by aviisekh on 8/11/16.
-*/
 
 public class RechargeActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     //public Bitmap image;
     private ImageButton rechargeBtn, redoButton;
     private EditText ocrResultTV;
     private ImageView rechargeImView;
-    private RelativeLayout relativeLayout;
     //    private ProgressBar progressBar;
     private ProgressDialog progressDialog;
     private Vibrator haptics;
     private final int HAPTICS_CONSTANT = 50;
 
 
-//    private final String simInfo = Splash.getSimInfo();
+    //    private final String simInfo = Splash.getSimInfo();
     private final String simInfo = MainActivity.getSimInfo();
     private final int BLACK = -16777216;
     private final int WHITE = -1;
@@ -112,28 +108,28 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
 
     private void recharge() {
         String prefix;
-        if (simInfo == "NTC" | simInfo == "NCELL") {
+        if (simInfo == "NTC")
+            prefix = "*412*";
+        else
+            prefix = "*102*";
 
-            if (simInfo == "NTC") prefix = "*412*";
-            else  prefix = "*102*";
-            String dial = prefix + ocrResultTV.getText().toString() + "#";
-            dial = dial.replace("*", Uri.encode("*")).replace("#", Uri.encode("#"));
-            Uri data = Uri.parse("tel:" + dial);
-            Intent dialIntent = new Intent(Intent.ACTION_CALL, data);
+        String dial = prefix + ocrResultTV.getText().toString() + "#";
 
+        dial = dial.replace("*", Uri.encode("*")).replace("#", Uri.encode("#"));
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(RechargeActivity.this, "Permission ERROR!!!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            startActivity(dialIntent);
+        Uri data = Uri.parse("tel:" + dial);
+
+        Intent dialIntent = new Intent(Intent.ACTION_CALL, data);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(RechargeActivity.this, "Permission ERROR!!!", Toast.LENGTH_SHORT).show();
+            return;
         }
-
-        else{
-            Toast.makeText(this,"No SIM detected", Toast.LENGTH_LONG).show();
-        }
-
+        startActivity(dialIntent);
     }
+
+
+
 
 
     @Override
@@ -162,7 +158,6 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         haptics = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         ocrResultTV = (EditText) findViewById(R.id.ocrResult);
         rechargeImView = (ImageView) findViewById(R.id.imageView2);
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout2);
 
 //        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -172,167 +167,156 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         new MyTask().execute();
     }
 
-    class MyTask extends AsyncTask<Void, Void, Void> {
+class MyTask extends AsyncTask<Void, Void, Void> {
 
-        private Bitmap thresholdedImage;
+    private Bitmap thresholdedImage;
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            processImage();
-            return null;
-        }
+    @Override
+    protected Void doInBackground(Void... params) {
+        processImage();
+        return null;
+    }
 
 
-        @Override
-        protected void onPostExecute(Void params) {
+    @Override
+    protected void onPostExecute(Void params) {
 //            progressBar.setVisibility(View.INVISIBLE);
-            relativeLayout.setVisibility(View.VISIBLE);
-            progressDialog.dismiss();
-            ocrResultTV.setVisibility(View.VISIBLE);
-            rechargeImView.setImageBitmap(thresholdedImage);
-            ocrResultTV.setText(ocrResult);
-        }
+        progressDialog.dismiss();
+        ocrResultTV.setVisibility(View.VISIBLE);
+        rechargeImView.setImageBitmap(thresholdedImage);
+        ocrResultTV.setText(ocrResult);
+    }
 
-        public void processImage() {
+    public void processImage() {
 
-            //Bitmap sourceBitmap = Bitmap.createBitmap(CropActivity.croppedImage);
-            bmResult = gammaCorrect(croppedImage);
-            //imageWriter.writeImage(bmResult, false, "aftergamma", "01_gamma");
+        bmResult = gammaCorrect(croppedImage);
 
 
-            bmResult = grayScale(bmResult);
-            //imageWriter.writeImage(bmResult, false, "aftergrayscale", "02_grayscale");
-            bmResult = skewCorrect(bmResult);
-            //imageWriter.writeImage(bmResult, false, "afterrotate", "03_rotate");
+        bmResult = grayScale(bmResult);
+        bmResult = skewCorrect(bmResult);
 
-            //bmResult = medianFilter(bmResult);
-            //imageWriter.writeImage(bmResult, false, "aftermedianfilter", "04_medianfilter");
+        bmResult = threshold(bmResult);
 
-            bmResult = threshold(bmResult);
-            //imageWriter.writeImage(bmResult, false, "afterthreshold", "05_threshold");
+        thresholdedImage = bmResult;
 
-            thresholdedImage = bmResult;
+        componentBitmaps = getSegmentArray(bmResult);
 
-            componentBitmaps = getSegmentArray(bmResult);
-            /*for (int i = 0; i < componentBitmaps.size(); i++) {
-                imageWriter.writeImage(componentBitmaps.get(i), true, "segment" + i, "06_segmentation");
-            }*/
 
-            List<double[][]> binarySegmentList = BinaryArray.CreateBinaryArray(componentBitmaps);
-            //generateBinarySegmentedImages();
+        List<double[][]> binarySegmentList = BinaryArray.CreateBinaryArray(componentBitmaps);
+        //generateBinarySegmentedImages();
 
-            ocrResult = generateOutput(binarySegmentList);
-        }
+        ocrResult = generateOutput(binarySegmentList);
+    }
 
-        private Bitmap gammaCorrect(Bitmap bmp) {
-            GammaCorrection gc = new GammaCorrection(1.0);
-            bmp = gc.correctGamma(bmp);
-            return bmp;
-        }
+    private Bitmap gammaCorrect(Bitmap bmp) {
+        GammaCorrection gc = new GammaCorrection(1.0);
+        bmp = gc.correctGamma(bmp);
+        return bmp;
+    }
 
-        private Bitmap grayScale(Bitmap bmp) {
-            GrayScale grayScale = new ITURGrayScale(bmp);
-            bmp = grayScale.grayScale();
-            return bmp;
-        }
+    private Bitmap grayScale(Bitmap bmp) {
+        GrayScale grayScale = new ITURGrayScale(bmp);
+        bmp = grayScale.grayScale();
+        return bmp;
+    }
 
-        private Bitmap skewCorrect(Bitmap bmp) {
-            SkewChecker skewChecker = new HoughLineSkewChecker();
-            double angle = skewChecker.getSkewAngle(bmp);
+    private Bitmap skewCorrect(Bitmap bmp) {
+        SkewChecker skewChecker = new HoughLineSkewChecker();
+        double angle = skewChecker.getSkewAngle(bmp);
 
-            Rotate rotator = new RotateNearestNeighbor(angle);
-            bmp = rotator.rotateImage(bmp);
-            return bmp;
-        }
+        Rotate rotator = new RotateNearestNeighbor(angle);
+        bmp = rotator.rotateImage(bmp);
+        return bmp;
+    }
 
-        private Bitmap medianFilter(Bitmap bmp) {
-            MedianFilter medianFilter = new NonLocalMedianFilter(3);
-            bmp = medianFilter.applyMedianFilter(bmp);
-            return bmp;
-        }
+    private Bitmap medianFilter(Bitmap bmp) {
+        MedianFilter medianFilter = new NonLocalMedianFilter(3);
+        bmp = medianFilter.applyMedianFilter(bmp);
+        return bmp;
+    }
 
-        private Bitmap threshold(Bitmap bmp) {
-            Threshold threshold = new BradleyThreshold();
-            bmp = threshold.threshold(bmp);
-            return bmp;
-        }
+    private Bitmap threshold(Bitmap bmp) {
+        Threshold threshold = new BradleyThreshold();
+        bmp = threshold.threshold(bmp);
+        return bmp;
+    }
 
-        private ArrayList<Bitmap> getSegmentArray(Bitmap bmp) {
-            ArrayList<Bitmap> segments;
-            bmp = PrepareImage.addBackgroundPixels(bmp);
-            int height = bmp.getHeight();
-            int width = bmp.getWidth();
+    private ArrayList<Bitmap> getSegmentArray(Bitmap bmp) {
+        ArrayList<Bitmap> segments;
+        bmp = PrepareImage.addBackgroundPixels(bmp);
+        int height = bmp.getHeight();
+        int width = bmp.getWidth();
 
 //                        get value of pixels from binary image
-            int[] pixels = createPixelArray(width, height, bmp);
+        int[] pixels = createPixelArray(width, height, bmp);
 
 //                       Create a binary array called booleanImage using pixel values in threshold bitmap
-            boolean[] booleanImage = new boolean[width * height];
+        boolean[] booleanImage = new boolean[width * height];
 
 
 //                      false if pixel is a background pixel, else true
-            int index = 0;
-            for (int pixel : pixels) {
-                if (pixel == BLACK) {
-                    booleanImage[index] = true;
-                }
-                index++;
+        int index = 0;
+        for (int pixel : pixels) {
+            if (pixel == BLACK) {
+                booleanImage[index] = true;
             }
-
-            CcLabeling ccLabeling = new CcLabeling();
-            ComponentImages componentImages = new ComponentImages(RechargeActivity.this);
-            segments = componentImages.CreateComponentImages(ccLabeling.CcLabels(booleanImage, width));
-            return segments;
+            index++;
         }
 
-        private void generateBinarySegmentedImages() {
-            List<int[]> binarySegmentList1D = BinaryArray.CreateBinaryArrayOneD(componentBitmaps);
+        CcLabeling ccLabeling = new CcLabeling();
+        ComponentImages componentImages = new ComponentImages(RechargeActivity.this);
+        segments = componentImages.CreateComponentImages(ccLabeling.CcLabels(booleanImage, width));
+        return segments;
+    }
 
-            int counter = 0;
-            for (int[] segment : binarySegmentList1D) {
-                for (int i = 0; i < 256; i++) {
-                    if (segment[i] == 1) segment[i] = WHITE;
-                    else segment[i] = BLACK;
-                }
-                Bitmap bitmap = Bitmap.createBitmap(segment, 16, 16, Bitmap.Config.RGB_565);
-                imageWriter.writeImage(bitmap, false, "segment" + counter++, "07_binarysegment");
+    private void generateBinarySegmentedImages() {
+        List<int[]> binarySegmentList1D = BinaryArray.CreateBinaryArrayOneD(componentBitmaps);
 
+        int counter = 0;
+        for (int[] segment : binarySegmentList1D) {
+            for (int i = 0; i < 256; i++) {
+                if (segment[i] == 1) segment[i] = WHITE;
+                else segment[i] = BLACK;
             }
-
-        }
-
-
-        private int[] createPixelArray(int width, int height, Bitmap thresholdImage) {
-
-            int[] pixels = new int[width * height];
-            thresholdImage.getPixels(pixels, 0, width, 0, 0, width, height);
-            return pixels;
-        }
-
-
-        private String generateOutput(List<double[][]> binarySegmentList) {
-            String ocrString = " ";
-            NeuralNetwork net = new NeuralNetwork(weightsArr.get(0), weightsArr.get(1), weightsArr.get(2), weightsArr.get(3));
-            List<Integer> recognizedList = new ArrayList<Integer>();
-            for (double[][] binarySegment : binarySegmentList) {
-                NNMatrix input = new NNMatrix(binarySegment);
-                NNMatrix output = net.FeedForward(input);
-                //output.showOutputArray();
-                int filteredOutput = output.filterOutput();
-
-                if (filteredOutput != -1)
-                    recognizedList.add(filteredOutput);
-
-
-            }
-
-            for (int a : recognizedList) {
-                ocrString = ocrString + Integer.toString(a);
-            }
-
-            return ocrString;
+            Bitmap bitmap = Bitmap.createBitmap(segment, 16, 16, Bitmap.Config.RGB_565);
+            imageWriter.writeImage(bitmap, false, "segment" + counter++, "07_binarysegment");
 
         }
 
     }
+
+
+    private int[] createPixelArray(int width, int height, Bitmap thresholdImage) {
+
+        int[] pixels = new int[width * height];
+        thresholdImage.getPixels(pixels, 0, width, 0, 0, width, height);
+        return pixels;
+    }
+
+
+    private String generateOutput(List<double[][]> binarySegmentList) {
+        String ocrString = " ";
+        NeuralNetwork net = new NeuralNetwork(weightsArr.get(0), weightsArr.get(1), weightsArr.get(2), weightsArr.get(3));
+        List<Integer> recognizedList = new ArrayList<Integer>();
+        for (double[][] binarySegment : binarySegmentList) {
+            NNMatrix input = new NNMatrix(binarySegment);
+            NNMatrix output = net.FeedForward(input);
+            //output.showOutputArray();
+            int filteredOutput = output.filterOutput();
+
+            if (filteredOutput != -1)
+                recognizedList.add(filteredOutput);
+
+
+        }
+
+        for (int a : recognizedList) {
+            ocrString = ocrString + Integer.toString(a);
+        }
+
+        return ocrString;
+
+    }
+
+}
 }

@@ -13,4 +13,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="image_from_camera">Image from Camera</string>
 
+    <string name="take_picture">Top Up</string>
+
 </resources>

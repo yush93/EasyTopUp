@@ -9,49 +9,8 @@
 
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_layout_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/darkTheme"
-        android:visibility="gone">
-
-
-        <ImageButton
-            android:id="@+id/redoFromRecharge"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/fab_margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            android:text="@string/redo"
-            android:tint="#FFFF"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            style="@style/Widget.AppCompat.Button.Colored"
-             />
-
-        <ImageButton
-            android:id="@+id/rechargeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/fab_margin"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_check_black_24dp"
-            android:tint="#FFFF"
-            style="@style/Widget.AppCompat.Button.Colored"
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/relativeLayout2"
         android:id="@+id/relativeLayout3"
         android:layout_marginLeft="@dimen/layout_margin"
         android:layout_marginRight="@dimen/layout_margin"
@@ -61,27 +20,99 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="350dp"
             android:contentDescription="@string/image_from_camera" />
 
-
-        <EditText
-            android:id="@+id/ocrResult"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="230dp"
             android:layout_alignParentBottom="true"
-            android:singleLine="true"
-            android:textColor="@android:color/white"
-            android:visibility="invisible"
-            android:backgroundTint="@android:color/black"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:inputType="number"
-            android:textSize="@dimen/text_size"
-            android:gravity="center"
-            android:layout_margin="@dimen/edittext_margin"
-            />
+            android:layout_alignParentStart="true"
+            android:background="#ffffff">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/ocrResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ems="20"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="PIN"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="55dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/redoFromRecharge"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:background="#ffffff"
+                            android:src="@drawable/ic_autorenew_black_24dp"
+                            android:text="@string/take_picture"
+                            android:onClick="onClick"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:text="Clear Data"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/rechargeBtn"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:background="#ffffff"
+                            android:src="@drawable/ic_menu_send"
+                            android:text="@string/take_picture"
+                            android:onClick="onClick"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:text="Top Up"
+                            android:textColor="#006d14"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
     </RelativeLayout>
 </RelativeLayout>
 

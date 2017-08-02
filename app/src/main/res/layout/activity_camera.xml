@@ -60,7 +60,7 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -68,7 +68,10 @@
             android:layout_alignParentTop="true"
             android:layout_below="@id/surfaceView"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textColor="#FFFFFF"
+            android:textSize="28dp"
+            android:background="@color/colorPrimaryDark"/>
 
         </RelativeLayout>
 

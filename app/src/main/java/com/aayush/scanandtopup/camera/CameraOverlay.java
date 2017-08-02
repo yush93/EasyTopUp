@@ -23,8 +23,11 @@ public class CameraOverlay extends View {
     private Rect rectLeft = new Rect();
     private Rect rectRight = new Rect();
 
+//    private final int WIDTH_OFFSET = 7;
+//    private final int HEIGHT_OFFSET = 6;
+
     private final int WIDTH_OFFSET = 7;
-    private final int HEIFHT_OFFSET = 6;
+    private final int HEIGHT_OFFSET = 6;
     private static int parentWidth,parentHeight,top,left,bottom,right;
 
 
@@ -40,13 +43,14 @@ public class CameraOverlay extends View {
         drawLineBoundary = new Paint();
         drawLineGrid = new Paint();
 
-        drawRect.setColor(Color.argb(50, 0, 0, 0));
+        drawRect.setColor(Color.argb(120, 0, 0, 0)); // for the rest of camera
 
 
-        drawLineBoundary.setColor(Color.argb(255, 12, 139, 86));
+//        drawLineBoundary.setColor(Color.argb(255, 12, 139, 86));rgba(41, 128, 185,1.0) rgba(52, 152, 219,1.0)
+        drawLineBoundary.setColor(Color.argb(255, 52, 152, 219)); // for the 4 corners in camera
         drawLineBoundary.setStrokeWidth(5);
 
-        drawLineGrid.setColor(Color.argb(50, 255, 255, 255));
+        drawLineGrid.setColor(Color.argb(100, 255, 255, 255));
         drawLineGrid.setStrokeWidth(2);
     }
 
@@ -69,14 +73,14 @@ public class CameraOverlay extends View {
     private void init()
     {
         left = parentWidth / WIDTH_OFFSET;
-        top = parentHeight / HEIFHT_OFFSET;
+        top = parentHeight / HEIGHT_OFFSET;
         right = 6*parentWidth / WIDTH_OFFSET;
-        bottom = 2*parentHeight / HEIFHT_OFFSET;
+        bottom = 2*parentHeight / HEIGHT_OFFSET;
     }
 
     private void drawRectangle(Canvas canvas) {
 
-        rectTop.set(0, 0, parentWidth, top);
+        rectTop.set(0, 0, parentWidth, top); //left top right bottom
         rectBottom.set(0, bottom, parentWidth, parentHeight);
         rectLeft.set(0, top, left, bottom);
         rectRight.set(right, top, parentWidth, bottom);
