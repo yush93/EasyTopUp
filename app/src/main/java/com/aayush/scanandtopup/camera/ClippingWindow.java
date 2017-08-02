@@ -34,7 +34,7 @@ public class ClippingWindow extends View {
     private VelocityTracker mVelocityTracker = null;
 
     private final int TOLERANCE = 30;       //Tolerence of Touch
-    private final int BOUNDARY_INIT=20;
+    private final int BOUNDARY_INIT=10;
     private final int MINIMAL_CROP_AREA=10;
     private final int RADIUS = 10;
 
@@ -59,8 +59,8 @@ public class ClippingWindow extends View {
         this.topBoundary =r.top;
         this.bottomBoundary =r.bottom;
 
-        this.left = r.left+BOUNDARY_INIT;
-        this.right = r.right-BOUNDARY_INIT;
+        this.left = r.left+BOUNDARY_INIT + 60;
+        this.right = r.right-BOUNDARY_INIT - 60;
         this.top = r.top+BOUNDARY_INIT;
         this.bottom = r.bottom-BOUNDARY_INIT;
 

@@ -184,7 +184,7 @@ class MyTask extends AsyncTask<Void, Void, Void> {
         progressDialog.dismiss();
         ocrResultTV.setVisibility(View.VISIBLE);
         rechargeImView.setImageBitmap(thresholdedImage);
-        ocrResultTV.setText(ocrResult);
+        ocrResultTV.setText(ocrResult.trim());
     }
 
     public void processImage() {

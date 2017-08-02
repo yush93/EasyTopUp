@@ -23,12 +23,13 @@ public class CameraOverlay extends View {
     private Rect rectLeft = new Rect();
     private Rect rectRight = new Rect();
 
-//    private final int WIDTH_OFFSET = 7;
-//    private final int HEIGHT_OFFSET = 6;
-
     private final int WIDTH_OFFSET = 7;
-    private final int HEIGHT_OFFSET = 6;
-    private static int parentWidth,parentHeight,top,left,bottom,right;
+    private final int HEIGHT_OFFSET = 2;
+
+//    private final int WIDTH_OFFSET = 10;
+//    private final int HEIGHT_OFFSET = 6;
+//    private static int parentWidth,parentHeight,top,left,bottom,right;
+    private static int parentWidth,parentHeight,top,bottom,left,right;
 
 
     public CameraOverlay(Context context, AttributeSet attrs) {
@@ -74,8 +75,9 @@ public class CameraOverlay extends View {
     {
         left = parentWidth / WIDTH_OFFSET;
         top = parentHeight / HEIGHT_OFFSET;
+//        right = 6*parentWidth / WIDTH_OFFSET;
         right = 6*parentWidth / WIDTH_OFFSET;
-        bottom = 2*parentHeight / HEIGHT_OFFSET;
+        bottom = (parentHeight / HEIGHT_OFFSET) + 65;
     }
 
     private void drawRectangle(Canvas canvas) {

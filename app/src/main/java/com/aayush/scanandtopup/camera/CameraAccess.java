@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.hardware.Camera;
@@ -65,7 +66,6 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
 
     private void instantiate() {
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
-        animateView = (RelativeLayout) findViewById(R.id.animateBar);
         simInfoView = (TextView) findViewById(R.id.simInfo);
 
         simInfoView.setText(simInfo);
