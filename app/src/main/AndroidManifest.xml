@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".maininterfaces.Splash"
+            android:name=".WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Easy Top Up"
             android:screenOrientation="portrait"
@@ -34,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".maininterfaces.Splash" android:screenOrientation="portrait" />
         <activity android:name=".maininterfaces.MainActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".maininterfaces.BalanceTransferActivity" android:screenOrientation="portrait" />
         <activity android:name=".camera.CameraAccess" android:screenOrientation="portrait" />

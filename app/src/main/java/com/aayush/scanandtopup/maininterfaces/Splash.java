@@ -135,22 +135,6 @@ public class Splash extends AppCompatActivity {
 
 
     private void loadData() {
-//        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-//        if (telephonyManager.getSimState() == TelephonyManager.SIM_STATE_READY) {
-//            if (telephonyManager.getNetworkOperatorName().toUpperCase().trim() == "NCELL") {
-//
-//                SIM = "NCELL";
-//
-//            } else {
-//                SIM = "NTC";
-//            }
-//        } else {
-//            SIM = "No SIM detected";
-//        }
-//
-////        siminfo.setText(SIM);
-
-
         JsonContentReader jsonContentReader = new JsonContentReader();
         String jsonContent = jsonContentReader.getJsonString(getApplicationContext());
 

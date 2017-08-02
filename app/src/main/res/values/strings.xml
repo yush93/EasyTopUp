@@ -15,4 +15,25 @@
 
     <string name="take_picture">Top Up</string>
 
+    <!--For Welcome Screen-->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Easy Top Up!</string>
+    <string name="slide_1_desc">The easiest way to recharge your phone\'s balance!</string>
+
+    <string name="slide_2_title">1. Scratch</string>
+    <string name="slide_2_desc">Scratch the PIN Area!</string>
+
+    <string name="slide_3_title">2. Scan</string>
+    <string name="slide_3_desc">Scan the PIN with the app camera by placing it inside the rectangle!</string>
+
+    <string name="slide_4_title">3. Top Up</string>
+    <string name="slide_4_desc">Confirm the PIN and Press TOP UP \n Done!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
 </resources>

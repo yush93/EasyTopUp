@@ -19,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.support.design.widget.TabLayout;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.aayush.scanandtopup.R;
+import com.aayush.scanandtopup.WelcomeActivity;
 import com.aayush.scanandtopup.camera.CameraAccess;
 
 
