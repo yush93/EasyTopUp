@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context="layout.NTC">
 
-    <!--**********************For TopUp**********************-->
-
     <LinearLayout
         android:id="@+id/ntcMainLinearLayout"
         android:layout_width="match_parent"
@@ -136,6 +134,5 @@
                     android:textSize="30dp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-
     </LinearLayout>
 </RelativeLayout>

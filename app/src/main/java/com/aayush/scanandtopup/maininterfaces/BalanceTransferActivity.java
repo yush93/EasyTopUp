@@ -36,7 +36,7 @@ public class BalanceTransferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance_transfer);
 
-        carrier = getIntent().getStringExtra("CARRIER");
+        carrier = MainActivity.getSimInfo();
         setTitle(carrier);
 
         textName = (TextView) findViewById(R.id.textName);
@@ -57,7 +57,6 @@ public class BalanceTransferActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             this.finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -59,8 +59,10 @@ public class ClippingWindow extends View {
         this.topBoundary =r.top;
         this.bottomBoundary =r.bottom;
 
-        this.left = r.left+BOUNDARY_INIT + 60;
-        this.right = r.right-BOUNDARY_INIT - 60;
+//        this.left = r.left+BOUNDARY_INIT + 60;
+//        this.right = r.right-BOUNDARY_INIT - 60;
+        this.left = r.left+BOUNDARY_INIT;
+        this.right = r.right-BOUNDARY_INIT;
         this.top = r.top+BOUNDARY_INIT;
         this.bottom = r.bottom-BOUNDARY_INIT;
 

@@ -126,13 +126,15 @@ public class MainActivity extends AppCompatActivity {
 
     /////////For Click Events///////////////////
     public void btn_clicked(View v) {
-        Intent nav = new Intent(this, CameraAccess.class);
+
         ////////////////////////For Recharge//////////////////////
         if (v.getId() == R.id.ntcRechargeLayout) {
+            Intent nav = new Intent(this, CameraAccess.class);
             SIM = "TopUp NTC";
             startActivity(nav);
             Toast.makeText(this, "NTC Recharge", Toast.LENGTH_SHORT).show();
         } else if (v.getId() == R.id.ncellRechargeLayout) {
+            Intent nav = new Intent(this, CameraAccess.class);
             SIM = "TopUp NCell";
             startActivity(nav);
             Toast.makeText(this, "NCell Recharge Pressed", Toast.LENGTH_LONG).show();
@@ -159,19 +161,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ///////////////////////////For Balance Transfer/////////////////////////////
-
         else if(v.getId() == R.id.ntcBalanceTransferLayout){
             Intent tNav = new Intent(this, BalanceTransferActivity.class);
-            tNav.putExtra("CARRIER", "NTC Transfer");
+            SIM = "NTC Balance Transfer";
             startActivity(tNav);
             Toast.makeText(this, "Transfer", Toast.LENGTH_LONG).show();
         } else {
             Intent tNav = new Intent(this, BalanceTransferActivity.class);
-            tNav.putExtra("CARRIER", "NCell Transfer");
-            Snackbar.make(v, "Transfer Balance", Snackbar.LENGTH_LONG).show();
+            SIM = "NCell Balance Transfer";
             startActivity(tNav);
-            //Toast.makeText(this, "Transfer", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(this, "Transfer", Toast.LENGTH_LONG).show();
         }
     }
 

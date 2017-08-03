@@ -35,9 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".maininterfaces.Splash" android:screenOrientation="portrait" />
-        <activity android:name=".maininterfaces.MainActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".maininterfaces.BalanceTransferActivity" android:screenOrientation="portrait" />
-        <activity android:name=".camera.CameraAccess" android:screenOrientation="portrait" />
+        <activity android:name=".maininterfaces.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".maininterfaces.BalanceTransferActivity" android:screenOrientation="portrait" android:theme="@style/Base.V7.Theme.AppCompat.Light"/>
+        <activity android:name=".camera.CameraAccess" android:screenOrientation="portrait"/>
         <activity
             android:name=".camera.CropActivity"
             android:screenOrientation="portrait"

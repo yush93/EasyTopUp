@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ScanAndTopUp</string>
+    <string name="app_name">Easy Top Up</string>
 
     <string name="title_activity_splash">Splash</string>
     <string name="dummy_button">Dummy Button</string>

@@ -16,7 +16,7 @@
     <dimen name="btn_height_small">12dp</dimen>
 
     <dimen name="design_fab_size_normal">90dp</dimen>
-    <dimen name="design_fab_size_mini">30dp</dimen>
+    <dimen name="design_fab_size_mini">56dp</dimen>
 
     <!--For Welcome Screen-->
     <dimen name="dots_height">30dp</dimen>
