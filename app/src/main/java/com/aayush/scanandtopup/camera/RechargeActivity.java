@@ -190,8 +190,6 @@ class MyTask extends AsyncTask<Void, Void, Void> {
     public void processImage() {
 
         bmResult = gammaCorrect(croppedImage);
-
-
         bmResult = grayScale(bmResult);
         bmResult = skewCorrect(bmResult);
 
