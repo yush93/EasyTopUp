@@ -13,10 +13,9 @@ public class BradleyThreshold implements Threshold {
     private int sourceImageWidth;
     private int sourceImageHeight;
     private final int MASKER = 0xFF;
-//    private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
-//private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
-private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.06F;
-    //private final float PIXEL_BRIGHTNESS_MAX = 1.0F;
+private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
+//private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.06F;
+//    private final float PIXEL_BRIGHTNESS_MAX = 1.0F;
     private final float PIXEL_BRIGHTNESS_MAX = 0.95F;
     private final int THRESHOLD_BLACK = 0x00;
     private final int THRESHOLD_WHITE = 0xFFFFFF;

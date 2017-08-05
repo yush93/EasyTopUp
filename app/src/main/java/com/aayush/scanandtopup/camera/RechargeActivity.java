@@ -113,13 +113,11 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         else
             prefix = "*102*";
 
-        String dial = prefix + ocrResultTV.getText().toString() + "#";
+        String dial = "tel:"+prefix + ocrResultTV.getText().toString().trim() + "%23";
+        Toast.makeText(this, dial, Toast.LENGTH_SHORT).show();
 
-        dial = dial.replace("*", Uri.encode("*")).replace("#", Uri.encode("#"));
-
-        Uri data = Uri.parse("tel:" + dial);
-
-        Intent dialIntent = new Intent(Intent.ACTION_CALL, data);
+        Intent dialIntent = new Intent(Intent.ACTION_CALL);
+        dialIntent.setData(Uri.parse(dial));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(RechargeActivity.this, "Permission ERROR!!!", Toast.LENGTH_SHORT).show();
