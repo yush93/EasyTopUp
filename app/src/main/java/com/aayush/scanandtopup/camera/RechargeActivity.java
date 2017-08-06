@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
@@ -83,6 +84,11 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
 //        croppedImage = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Bitmap originalBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Matrix matrix = new Matrix();
+        //Edited here to rotate.........................
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            matrix.postRotate(-90);
+        }
+        //...............................................................................................
         croppedImage = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
 //        croppedImage = CameraAccess.getBitmapImage();
 
