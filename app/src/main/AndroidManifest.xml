@@ -12,7 +12,8 @@
 
     <!-- Features -->
     <uses-feature
-        android:name="android.hardware.camera" android:required="true" />
+        android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -22,7 +23,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -31,13 +31,23 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".maininterfaces.Splash" android:screenOrientation="portrait" />
-        <activity android:name=".maininterfaces.MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".maininterfaces.BalanceTransferActivity" android:screenOrientation="portrait" android:theme="@style/Base.V7.Theme.AppCompat.Light"/>
-        <activity android:name=".camera.CameraAccess" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".maininterfaces.Splash"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".maininterfaces.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".maininterfaces.BalanceTransferActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.V7.Theme.AppCompat.Light" />
+        <activity
+            android:name=".camera.CameraAccess"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".camera.CropActivity"
             android:screenOrientation="portrait"
@@ -46,6 +56,9 @@
             android:name=".camera.RechargeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".extras.About"
+            android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>

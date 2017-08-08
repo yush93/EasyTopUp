@@ -23,19 +23,24 @@ import android.view.ViewGroup;
 
 import android.support.design.widget.TabLayout;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.WelcomeActivity;
 import com.aayush.scanandtopup.camera.CameraAccess;
+import com.aayush.scanandtopup.extras.About;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
 
     private static String SIM;
+    
+    private ImageButton buttonTutorial;
+    private Button buttonAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+
+        buttonAbout = (Button) findViewById(R.id.buttonAbout);
+        buttonTutorial = (ImageButton) findViewById(R.id.buttonTutorial);
+        
+        buttonAbout.setOnClickListener(this);
+        buttonTutorial.setOnClickListener(this);
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -63,21 +75,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu); //your file name
-        return super.onCreateOptionsMenu(menu);
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.buttonAbout:
+                Intent aboutIntent = new Intent(MainActivity.this, About.class);
+                startActivity(aboutIntent);
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                break;
+            case R.id.buttonTutorial:
+                break;
+        }
     }
-
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu); //your file name
+//        return super.onCreateOptionsMenu(menu);
+//    }
+////
 //    @Override
 //    public boolean onOptionsItemSelected(final MenuItem item) {
 //
 //        switch (item.getItemId()) {
-//            case android.R.id.action_settings:
+//            case R.id.action_about:
 //                //your code
 //                // EX : call intent if you want to swich to other activity
 //                return true;
-//            case R.id.help:
+//            case R.id.action_help:
 //                //your code
 //                return true;
 //            default:
@@ -85,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-        /////////////////////Fragments or tabs are displayed from here
+    /////////////////////Fragments or tabs are displayed from here
 
     public static class PlaceholderFragment extends Fragment {
 
