@@ -58,7 +58,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".extras.About"
-            android:theme="@style/AppTheme.CustomTheme"/>
+            android:theme="@style/Base.V7.Theme.AppCompat"/>
     </application>
 
 </manifest>

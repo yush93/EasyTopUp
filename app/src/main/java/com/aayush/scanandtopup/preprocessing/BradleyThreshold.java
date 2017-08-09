@@ -1,8 +1,10 @@
 package com.aayush.scanandtopup.preprocessing;
 
 import android.graphics.Bitmap;
+import android.widget.Toast;
 
 import com.aayush.scanandtopup.interfaces.Threshold;
+import com.aayush.scanandtopup.maininterfaces.MainActivity;
 
 /**
  * Created by anush on 6/21/2016.
@@ -13,16 +15,22 @@ public class BradleyThreshold implements Threshold {
     private int sourceImageWidth;
     private int sourceImageHeight;
     private final int MASKER = 0xFF;
-private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
+    private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
 //private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.06F;
+
+    //The value is initialized below taking in consideration the carrier
+
     private final float PIXEL_BRIGHTNESS_MAX = 1.0F;
 //    private final float PIXEL_BRIGHTNESS_MAX = 0.95F;
+
     private final int THRESHOLD_BLACK = 0x00;
     private final int THRESHOLD_WHITE = 0xFFFFFF;
     private final int FRAME_SIZE_RATIO = 8;
     private final int startX = 0;
     private final int startY = 0;
     private final int offSet = 0;
+
+    private final String simInfo = MainActivity.getSimInfo();
 
     int currentPixel;
     int previousPixel;

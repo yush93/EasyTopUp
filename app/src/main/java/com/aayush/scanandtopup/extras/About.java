@@ -13,6 +13,7 @@ public class About extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        this.setTitle("About Developers");
 //        DisplayMetrics dm = new DisplayMetrics();
 //        getWindowManager().getDefaultDisplay().getMetrics(dm);
 //
