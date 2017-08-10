@@ -7,22 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.camera.DatabaseHelper;
 import com.aayush.scanandtopup.extras.HistoryAdapter;
 import com.aayush.scanandtopup.extras.HistoryData;
-
 import java.util.ArrayList;
-
-/**
- * Created by aayus on 8/10/2017.
- */
 
 public class History extends AppCompatActivity {
 

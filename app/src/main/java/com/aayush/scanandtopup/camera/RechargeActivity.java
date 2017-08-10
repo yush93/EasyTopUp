@@ -130,7 +130,7 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
                 String date = DateFormat.getDateInstance().format(new Date()).toString();
                 String sim = simInfo.equals("TopUp NTC")?"NTC":"NCell";
                 AddData(date, sim , pin);
-//                recharge();
+                recharge();
                 break;
 
         }
