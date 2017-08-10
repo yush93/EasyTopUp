@@ -44,12 +44,20 @@ import com.aayush.scanandtopup.segmentation.CcLabeling;
 import com.aayush.scanandtopup.segmentation.ComponentImages;
 import com.aayush.scanandtopup.segmentation.PrepareImage;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 
 public class RechargeActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+
+    private static final String TAG = "RechargeActivity";
+    DatabaseHelper mDatabaseHelper;
+
+
     //public Bitmap image;
     private ImageButton rechargeBtn, redoButton;
     private EditText ocrResultTV;
@@ -80,8 +88,9 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
 
+        mDatabaseHelper = new DatabaseHelper(this);
+
         byte[] byteArray = getIntent().getByteArrayExtra("image");
-//        croppedImage = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Bitmap originalBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Matrix matrix = new Matrix();
         //Edited here to rotate.........................
@@ -96,6 +105,18 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    public void AddData(String date, String carrier, String pin){
+        boolean insertData = mDatabaseHelper.addData(date, carrier, pin);
+        if(insertData)
+            toastMessage("Data Successfully Inserted");
+        else
+            toastMessage("Something went wrong");
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onClick(View v) {
         haptics.vibrate(HAPTICS_CONSTANT);
@@ -105,8 +126,11 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.rechargeBtn:
-                //Toast.makeText(RechargeActivity.this, "RechargePressed", Toast.LENGTH_SHORT).show();
-                recharge();
+                String pin = ocrResultTV.getText().toString();
+                String date = DateFormat.getDateInstance().format(new Date()).toString();
+                String sim = simInfo.equals("TopUp NTC")?"NTC":"NCell";
+                AddData(date, sim , pin);
+//                recharge();
                 break;
 
         }

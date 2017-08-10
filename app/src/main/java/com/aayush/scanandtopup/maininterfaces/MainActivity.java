@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static String SIM;
     
-    private ImageButton buttonTutorial;
-    private ImageButton buttonAbout;
+    private ImageButton buttonTutorial, buttonAbout, buttonHistory;
 
 
     @Override
@@ -52,9 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonAbout = (ImageButton) findViewById(R.id.buttonAbout);
         buttonTutorial = (ImageButton) findViewById(R.id.buttonTutorial);
-        
+        buttonHistory = (ImageButton) findViewById(R.id.buttonHistory);
+
         buttonAbout.setOnClickListener(this);
         buttonTutorial.setOnClickListener(this);
+        buttonHistory.setOnClickListener(this);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -80,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonTutorial:
                 startActivity(new Intent(MainActivity.this, Help.class));
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                break;
+            case R.id.buttonHistory:
+                startActivity(new Intent(MainActivity.this, History.class));
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
         }

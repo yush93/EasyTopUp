@@ -62,7 +62,11 @@
         <activity
             android:name=".extras.Help"
             android:label="Help"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".maininterfaces.History"
+            android:label="History"
+            android:theme="@style/Base.V7.Theme.AppCompat.Light" />
     </application>
 
 </manifest>
