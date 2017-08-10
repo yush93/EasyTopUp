@@ -11,6 +11,8 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
+import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +36,8 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
 
     private final int HEPTICS_CONSTANT = 50;
 
-
     private Camera camera;
+
     private SurfaceHolder surfaceHolder;
     private SurfaceView surfaceView;
 
@@ -81,7 +84,6 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
         surfaceHolder.addCallback(this);
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-
         autoFocusCallback = new Camera.AutoFocusCallback() {
             @Override
             public void onAutoFocus(boolean b, Camera camera) {
@@ -124,6 +126,7 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
 
                         Intent intent = new Intent(getApplicationContext(), CropActivity.class);
                         startActivity(intent);
+                        finish();
 
                     }
                 } catch (Exception e) {
@@ -146,7 +149,6 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
-
             case R.id.takepicture:
                 Toast.makeText(this, "Capture Image", Toast.LENGTH_LONG).show();
                 break;
@@ -252,5 +254,4 @@ public class CameraAccess extends Activity implements SurfaceHolder.Callback, Vi
         }
         return cameraId;
     }
-
 }

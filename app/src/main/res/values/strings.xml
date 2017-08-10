@@ -35,5 +35,12 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
+    <string name="title_activity_help">help</string>
+    <string name="howToRecharge">
+        1.  Scratchy the Recharge Card properly.\n2.  Click on Balance Top Up.
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

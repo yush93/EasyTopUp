@@ -58,7 +58,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".extras.About"
-            android:theme="@style/Base.V7.Theme.AppCompat"/>
+            android:theme="@style/Base.V7.Theme.AppCompat" />
+        <activity
+            android:name=".extras.Help"
+            android:label="Help"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

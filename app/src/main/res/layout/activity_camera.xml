@@ -8,9 +8,9 @@
     tools:context="com.aayush.scanandtopup.camera.CameraAccess">
 
     <RelativeLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <SurfaceView
             android:layout_width="match_parent"
@@ -42,8 +42,10 @@
             android:textSize="18dp"
             android:padding="10dp"
             android:background="@color/colorPrimaryDark"/>
-
         </RelativeLayout>
+
+
+
     <android.support.design.widget.FloatingActionButton
 
         android:layout_width="wrap_content"

@@ -1,11 +1,12 @@
 package com.aayush.scanandtopup.maininterfaces;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,21 +16,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.support.design.widget.TabLayout;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.aayush.scanandtopup.R;
-import com.aayush.scanandtopup.WelcomeActivity;
 import com.aayush.scanandtopup.camera.CameraAccess;
 import com.aayush.scanandtopup.extras.About;
+import com.aayush.scanandtopup.extras.Help;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static String SIM;
     
     private ImageButton buttonTutorial;
-    private Button buttonAbout;
+    private ImageButton buttonAbout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        buttonAbout = (Button) findViewById(R.id.buttonAbout);
+        buttonAbout = (ImageButton) findViewById(R.id.buttonAbout);
         buttonTutorial = (ImageButton) findViewById(R.id.buttonTutorial);
         
         buttonAbout.setOnClickListener(this);
@@ -71,44 +69,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_sim_card_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_sim_card_black_24dp);
 
-
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.buttonAbout:
-                Intent aboutIntent = new Intent(MainActivity.this, About.class);
-                startActivity(aboutIntent);
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                startActivity(new Intent(MainActivity.this, About.class));
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
             case R.id.buttonTutorial:
+                startActivity(new Intent(MainActivity.this, Help.class));
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
         }
     }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_main, menu); //your file name
-//        return super.onCreateOptionsMenu(menu);
-//    }
-////
-//    @Override
-//    public boolean onOptionsItemSelected(final MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.action_about:
-//                //your code
-//                // EX : call intent if you want to swich to other activity
-//                return true;
-//            case R.id.action_help:
-//                //your code
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+
 
     /////////////////////Fragments or tabs are displayed from here
 
