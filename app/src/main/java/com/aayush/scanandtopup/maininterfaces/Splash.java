@@ -5,36 +5,27 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.aayush.scanandtopup.classifier.JsonContentReader;
 import com.aayush.scanandtopup.classifier.NNMatrix;
 import com.aayush.scanandtopup.classifier.WeightReader;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Splash extends AppCompatActivity {
-
-    //My code begins from here
-
     private static NNMatrix weights_at_layer2, weights_at_layer3;
     private static NNMatrix bias_at_layer2, bias_at_layer3;
-
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-
 
     @TargetApi(Build.VERSION_CODES.M)
     private boolean permissionRequest() {
         List<String> permissionNeeded = new ArrayList<String>();
         final List<String> permissionList = new ArrayList<String>();
-
         if (!addPermission(permissionList, android.Manifest.permission.CALL_PHONE)) {
             permissionNeeded.add("CALL");
         }
@@ -50,15 +41,12 @@ public class Splash extends AppCompatActivity {
         if (!addPermission(permissionList, Manifest.permission.VIBRATE)) {
             permissionNeeded.add("HAPTICS");
         }
-
-
         if (permissionList.size() > 0) {
             requestPermissions(permissionList.toArray(new String[permissionList.size()]),REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
             return true;
         } else
             return false;
     }
-
 
     @TargetApi(Build.VERSION_CODES.M)
     private boolean addPermission(List<String> permissionList, String permission) {
@@ -104,13 +92,9 @@ public class Splash extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //siminfo = (TextView) findViewById(R.id.splashSimInfo);
-
         if (!permissionRequest()) {
             loadData();
             changeIntent();
@@ -119,35 +103,22 @@ public class Splash extends AppCompatActivity {
 
     private void changeIntent()
     {
-        /* Create an Intent that will start the Camera Activity. */
         Intent mainIntent = new Intent(Splash.this, MainActivity.class);
         Splash.this.startActivity(mainIntent);
         Splash.this.finish();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//
-//            }
-//        }, 3000);
-
     }
-
 
     private void loadData() {
         JsonContentReader jsonContentReader = new JsonContentReader();
         String jsonContent = jsonContentReader.getJsonString(getApplicationContext());
-
         WeightReader weightReader = new WeightReader();
         bias_at_layer2 = new NNMatrix(weightReader.getWeights(jsonContent, "layer_1_bias"));
         weights_at_layer2 = new NNMatrix(weightReader.getWeights(jsonContent, "layer_1_weight"));
         weights_at_layer3 = new NNMatrix(weightReader.getWeights(jsonContent, "layer_2_weight"));
         bias_at_layer3 = new NNMatrix(weightReader.getWeights(jsonContent, "layer_2_bias"));
-
     }
 
-    public static ArrayList<NNMatrix> getWeights()
-    {
+    public static ArrayList<NNMatrix> getWeights() {
         ArrayList<NNMatrix>  weightArr = new ArrayList<NNMatrix>();
         weightArr.add(bias_at_layer2);
         weightArr.add(bias_at_layer3);
@@ -155,5 +126,4 @@ public class Splash extends AppCompatActivity {
         weightArr.add(weights_at_layer3);
         return weightArr;
     }
-
 }

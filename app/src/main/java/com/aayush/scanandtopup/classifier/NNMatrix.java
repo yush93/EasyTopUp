@@ -4,9 +4,6 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-/**
- * Created by aviisekh on 7/29/16.
- */
 public class NNMatrix {
     private final int M;             // number of rows
     private final int N;             // number of columns
@@ -34,7 +31,6 @@ public class NNMatrix {
         this(A.data);
     }
 
-
     // return C = A + B
     public NNMatrix plus(NNMatrix B) {
         NNMatrix A = this;
@@ -45,7 +41,6 @@ public class NNMatrix {
                 C.data[i][j] = A.data[i][j] + B.data[i][j];
         return C;
     }
-
 
     // return C = A * B
     public NNMatrix times(NNMatrix B) {
@@ -68,7 +63,6 @@ public class NNMatrix {
         return A;
     }
 
-
     // print matrix to standard output
     public void showOutputArray() {
         Log.d("OutputMatrix", Arrays.deepToString(this.data));
@@ -79,24 +73,18 @@ public class NNMatrix {
         int second_largestIndex = -1;
         double largest = this.data[largestIndex][0];
         double second_largest = -1;
-
         int i;
         for (i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-
                 if (this.data[i][j] > largest) {
                     second_largestIndex = largestIndex;
                     largestIndex = i;
                     second_largest = largest;
                     largest = this.data[largestIndex][j];
-
                 } else if (this.data[i][j] > second_largest && this.data[i][j] != largest) {
                     second_largestIndex = i;
                     second_largest = this.data[i][j];
-
                 }
-
-
             }
         }
         Log.d("Output", largestIndex + " has probability " + Double.toString(largest));
@@ -104,10 +92,7 @@ public class NNMatrix {
         if (largest > 0.2)
             return largestIndex;
         else return -1;
-
     }
-
-
 }
 
 

@@ -2,19 +2,12 @@ package com.aayush.scanandtopup.preprocessing;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import com.aayush.scanandtopup.interfaces.GrayScale;
 
-/**
- * Created by anush on 6/21/2016.
- */
-
 public class ITURGrayScale implements GrayScale {
-
     private final Bitmap sourceImageBitmap;
     private final int width;
     private final int height;
-    //ITU-R recommendation value
     final double GS_RED = 0.299;
     final double GS_GREEN = 0.587;
     final double GS_BLUE = 0.114;
@@ -31,7 +24,6 @@ public class ITURGrayScale implements GrayScale {
         Bitmap afterGrayScaleImage = Bitmap.createBitmap(sourceImageBitmap.getWidth(), sourceImageBitmap.getHeight(), sourceImageBitmap.getConfig());
         int A, R, G, B;
         int pixel;
-
         //scan pixel
         for (int row = 0; row < width; ++row) {
             for (int column = 0; column < height; ++column) {

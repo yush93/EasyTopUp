@@ -3,20 +3,13 @@ package com.aayush.scanandtopup.preprocessing;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-
 import java.io.File;
-
-/**
- * Created by Anush Shrestha on 8/3/2016.
- */
 
 public class SingleMediaScanner implements MediaScannerConnection.MediaScannerConnectionClient {
     private MediaScannerConnection mediaScannerConnection;
     private File imageFile;
 
-    public SingleMediaScanner() {
-
-    }
+    public SingleMediaScanner() { }
 
     public void beginConnection(Context context, File imageFile){
         this.imageFile = imageFile;

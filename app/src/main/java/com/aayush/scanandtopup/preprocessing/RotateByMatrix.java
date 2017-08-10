@@ -1,18 +1,12 @@
 package com.aayush.scanandtopup.preprocessing;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-
-/**
- * Created by anush on 7/18/2016.
- */
 
 public class RotateByMatrix {
     private double angle;
     private int newWidth;
     private int newHeight;
-
 
     public double getAngle() {
         return -this.angle;
@@ -41,7 +35,6 @@ public class RotateByMatrix {
         sourceImage.getPixels(pixels, 0, width, 0, 0, width, height);
         return pixels;
     }
-
 
     private void CalculateNewSize(Bitmap sourceImage) {
         this.newWidth = sourceImage.getWidth();

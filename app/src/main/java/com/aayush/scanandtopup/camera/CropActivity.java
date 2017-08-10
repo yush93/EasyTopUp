@@ -1,6 +1,5 @@
 package com.aayush.scanandtopup.camera;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,15 +12,11 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.interfaces.Coordinates;
-
 import java.io.ByteArrayOutputStream;
 
-
 public class CropActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
-
     private ImageView cropImView;
     private ClippingWindow clippingWindow;
     private Vibrator haptics;
@@ -50,8 +45,6 @@ public class CropActivity extends Activity implements View.OnClickListener, View
             case R.id.redoFromCrop:
                 onBackPressed();
                 break;
-
-
         }
     }
 
@@ -64,28 +57,20 @@ public class CropActivity extends Activity implements View.OnClickListener, View
             case R.id.redoFromCrop:
                 Toast.makeText(this, "Redo", Toast.LENGTH_LONG).show();
                 break;
-
         }
         return true;
     }
-
 
     private void instantiate() {
         redoButton = (ImageButton) findViewById(R.id.redoFromCrop);
         haptics = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         cropButton = (ImageButton) findViewById(R.id.cropBtn);
-
         redoButton.setOnClickListener(this);
         cropButton.setOnClickListener(this);
-
-        //image = BitmapFactory.decodeResource(getResources(), R.drawable.ntc_target_test);
         image = CameraAccess.getBitmapImage();
         cropImView = (ImageView) findViewById(R.id.imageView);
         cropImView.setImageBitmap(image);
-
         clippingWindow = (ClippingWindow) findViewById(R.id.clipping);
-
-
         ViewTreeObserver vto = cropImView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -97,29 +82,20 @@ public class CropActivity extends Activity implements View.OnClickListener, View
                 clippingWindow.initializeBoundary(imageCoordinates);
             }
         });
-
-
-
-
     }
 
     private void crop() {
         Coordinates bitmapCoordinates = new CoordinateLocatorInBitmap(cropImView,clippingWindow.getClippingWindowCoordinates());
         Rect bitmapClippingCoordinates = bitmapCoordinates.getCoordinates();
-//        cropImView.setImageBitmap(croppedImage);
         Bitmap originalBitmap = ((BitmapDrawable) cropImView.getDrawable()).getBitmap();
         croppedImage = Bitmap.createBitmap(originalBitmap, bitmapClippingCoordinates.left, bitmapClippingCoordinates.top, bitmapClippingCoordinates.right - bitmapClippingCoordinates.left, bitmapClippingCoordinates.bottom - bitmapClippingCoordinates.top);
-
     }
 
     private void changeIntent() {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         croppedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-
         Intent intent = new Intent(this, RechargeActivity.class).putExtra("image", byteArray);
         startActivity(intent);
     }
-
-
 }

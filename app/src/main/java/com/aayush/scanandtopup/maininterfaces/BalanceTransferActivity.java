@@ -16,39 +16,29 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.aayush.scanandtopup.R;
 
 public class BalanceTransferActivity extends AppCompatActivity {
-
     EditText textContact, textCode, textAmount;
     TextView textName;
-
     private static final String TAG = BalanceTransferActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
     private Uri uriContact;
     private String contactID; // contacts unique ID
-
     String carrier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance_transfer);
-
         carrier = MainActivity.getSimInfo();
         setTitle(carrier);
-
         textName = (TextView) findViewById(R.id.textName);
-
         textContact = (EditText) findViewById(R.id.textContact);
         textCode = (EditText) findViewById(R.id.textCode);
         textAmount = (EditText) findViewById(R.id.textAmount);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
     }
 
     @Override
@@ -67,76 +57,50 @@ public class BalanceTransferActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_CODE_PICK_CONTACTS && resultCode == RESULT_OK) {
             Log.d(TAG, "Response: " + data.toString());
             uriContact = data.getData();
-
             retrieveContactName();
             retrieveContactNumber();
-
         }
     }
 
     private void retrieveContactNumber() {
-
         String contactNumber = null;
-
         // getting contacts ID
         Cursor cursorID = getContentResolver().query(uriContact,
                 new String[]{ContactsContract.Contacts._ID},
                 null, null, null);
-
         if (cursorID.moveToFirst()) {
-
             contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID));
         }
-
         cursorID.close();
-
         Log.d(TAG, "Contact ID: " + contactID);
-
         // Using the contact ID now we will get contact phone number
         Cursor cursorPhone = getContentResolver().query(Phone.CONTENT_URI,
                 new String[]{Phone.NUMBER},
-
                 Phone.CONTACT_ID + " = ? AND " +
                         Phone.TYPE + " = " +
                         Phone.TYPE_MOBILE,
-
                 new String[]{contactID},
                 null);
-
         if (cursorPhone.moveToFirst()) {
             contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(Phone.NUMBER));
         }
-
         cursorPhone.close();
-
         textContact.setText(contactNumber);
-
-        //Log.d(TAG, "Contact Phone Number: " + contactNumber);
     }
 
     private void retrieveContactName() {
-
         String contactName = null;
-
         // querying contact data store
         Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
-
         if (cursor.moveToFirst()) {
-
-            // DISPLAY_NAME = The display name for the contact.
-            // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
-
             contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         }
 
         cursor.close();
-
         textName.setText(contactName);
-        //Log.d(TAG, "Contact Name: " + contactName);
 
     }
 

@@ -9,7 +9,6 @@ public class HoughLine implements Comparable {
     private double radius;
     private int intensity;
     private double relativeIntensity;
-
     private final double MIN_THETA=0.7853981633974483D;
     private final double MAX_THETA=2.356194490192345D;
 
@@ -44,7 +43,6 @@ public class HoughLine implements Comparable {
     public void setRelativeIntensity(double relativeIntensity) {
         this.relativeIntensity = relativeIntensity;
     }
-
 
     public HoughLine(double theta, double radius, int intensity, double relativeIntensity) {
         this.theta = theta;

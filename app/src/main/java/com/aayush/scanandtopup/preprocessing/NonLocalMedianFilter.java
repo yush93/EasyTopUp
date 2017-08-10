@@ -2,17 +2,11 @@ package com.aayush.scanandtopup.preprocessing;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import com.aayush.scanandtopup.interfaces.MedianFilter;
-
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-/**
- * Created by anush on 7/20/2016.
- */
 
 public class NonLocalMedianFilter implements MedianFilter {
     private final int CORE_MULTIPLIER=16;
@@ -21,7 +15,6 @@ public class NonLocalMedianFilter implements MedianFilter {
     private final int BOUNDRY_LIMITER=1;
     private final int MIN_X=0;
     private final int MIN_Y=0;
-
     private int frameSize = 1;
     private Bitmap resultBitmap;
     private int width;
@@ -29,10 +22,7 @@ public class NonLocalMedianFilter implements MedianFilter {
     private int xMin;
     private int xMax;
     private int yMin;
-
     private int ymax;
-
-
 
     public int getFrameSize() {
         return this.frameSize;
@@ -41,7 +31,6 @@ public class NonLocalMedianFilter implements MedianFilter {
     public void setFrameSize(int frameSize) {
         this.frameSize = Math.max(1, frameSize);
     }
-
 
     public NonLocalMedianFilter(int frameSize) {
         this.setFrameSize(frameSize);
@@ -57,7 +46,6 @@ public class NonLocalMedianFilter implements MedianFilter {
             return ((framePixels[noOfPixels / DIVIDER] + framePixels[noOfPixels / DIVIDER - BOUNDRY_LIMITER]) / DIVIDER);
     }
 
-
     private void calculateFrameEdges(int x, int y) {
         xMin = x - frameSize;
         xMax = x + frameSize;
@@ -70,7 +58,6 @@ public class NonLocalMedianFilter implements MedianFilter {
         if (xMin < MIN_X)
             xMin = MIN_X;
         if (xMax > (width - BOUNDRY_LIMITER))
-
             xMax = width - BOUNDRY_LIMITER;
         if (yMin < MIN_Y)
             yMin = MIN_Y;
@@ -103,7 +90,6 @@ public class NonLocalMedianFilter implements MedianFilter {
         height = sourceBitmap.getHeight();
         int cores = Runtime.getRuntime().availableProcessors();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(cores * CORE_MULTIPLIER, cores * CORE_MULTIPLIER, THREAD_ALIVE_TIME, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
-
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -122,7 +108,6 @@ public class NonLocalMedianFilter implements MedianFilter {
                         int R = calculateMedian(red);
                         int G = calculateMedian(green);
                         int B = calculateMedian(blue);
-//                System.out.println("median"+R+","+G+","+B);
                         resultBitmap.setPixel(row, column, Color.rgb(R, G, B));
                     }
                 }

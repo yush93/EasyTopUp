@@ -1,4 +1,4 @@
-package com.aayush.scanandtopup.camera;
+package com.aayush.scanandtopup.extras;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,10 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-/**
- * Created by aayus on 8/10/2017.
- */
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -20,10 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COL1 = "date";
     private static final String COL2 = "carrier";
     private static final String COL3 = "pin";
-
-    public DatabaseHelper(Context context){
-        super(context, DATABASE_NAME, null, 1);
-    }
+    public DatabaseHelper(Context context) {super(context, DATABASE_NAME, null, 1);}
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -33,7 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 COL2 + " TEXT," +
                 COL3 + " TEXT)";
         db.execSQL(createTable);
-
     }
 
     @Override

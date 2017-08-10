@@ -11,33 +11,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.aayush.scanandtopup.R;
-import com.aayush.scanandtopup.camera.DatabaseHelper;
+import com.aayush.scanandtopup.extras.DatabaseHelper;
 import com.aayush.scanandtopup.extras.HistoryAdapter;
 import com.aayush.scanandtopup.extras.HistoryData;
 import java.util.ArrayList;
 
 public class History extends AppCompatActivity {
-
     private static final String TAG = "HistoryActivity";
-
     DatabaseHelper mDatabaseHelper;
-
     private ListView mListView;
     private TextView textView1, textView2, textView3;
-
     FloatingActionButton clear;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
         this.setTitle("TopUp History");
-
         textView1 = (TextView) findViewById(R.id.textView1);
         textView2 = (TextView) findViewById(R.id.textView2);
         textView3 = (TextView) findViewById(R.id.textView3);
-
         mListView = (ListView) findViewById(R.id.listView);
         clear = (FloatingActionButton) findViewById(R.id.clear);
         clear.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +62,7 @@ public class History extends AppCompatActivity {
             HistoryAdapter adapter = new HistoryAdapter(this, R.layout.adapter_view, listData);
             mListView.setAdapter(adapter);
         }
-
     }
 
-    private void clearHistory(){
-        mDatabaseHelper.clearData();
-    }
+    private void clearHistory() {mDatabaseHelper.clearData();}
 }

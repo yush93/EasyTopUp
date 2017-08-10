@@ -1,12 +1,6 @@
 package com.aayush.scanandtopup.preprocessing;
 
 import android.graphics.Bitmap;
-
-/**
- * Created by anush on 7/18/2016.
- * FOR REFERENCE ONLY.
- */
-
 public class DeskewFromPlugin {
     public double doIt(Bitmap image) {
         final double skewRadians;
