@@ -1,13 +1,115 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="layout.requiredaccess">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Permission Required Fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:text="Required Permissions"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Camera"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Write to SD Card"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="1dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read Phone State"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vibrate"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Call Phone"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read Contacts"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"/>
+
+
+</LinearLayout>

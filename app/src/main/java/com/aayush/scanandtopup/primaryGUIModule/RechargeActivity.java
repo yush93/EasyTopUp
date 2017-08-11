@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aayush.scanandtopup.helperModule.DatabaseHelper;
@@ -37,6 +39,8 @@ import com.aayush.scanandtopup.segmentationModule.BinaryArray;
 import com.aayush.scanandtopup.segmentationModule.CcLabeling;
 import com.aayush.scanandtopup.segmentationModule.ComponentImages;
 import com.aayush.scanandtopup.segmentationModule.PrepareImage;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -61,6 +65,7 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
     private Bitmap bmResult;
     private String ocrResult;
     private ImageWriter imageWriter;
+    private TextView pinNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +75,6 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         Bitmap originalBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Matrix matrix = new Matrix();
-        //Edited here to rotate.........................
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            matrix.postRotate(-90);
-//        }
-        //..................
         croppedImage = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         instantiate();
     }
@@ -100,23 +100,18 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.rechargeBtn:
+                recharge();
                 String pin = ocrResultTV.getText().toString();
                 String date = DateFormat.getDateInstance().format(new Date()).toString();
                 String sim = simInfo.equals("TopUp NTC") ? "NTC" : "NCell";
                 AddData(date, sim, pin);
-                recharge();
                 break;
         }
     }
 
     private void recharge() {
-        String prefix;
-        if (simInfo == "NTC")
-            prefix = "*412*";
-        else
-            prefix = "*102*";
-        String dial = "tel:" + prefix + ocrResultTV.getText().toString().trim() + "%23";
-        Toast.makeText(this, dial, Toast.LENGTH_SHORT).show();
+        String prefix = simInfo.equals("TopUp NTC") ? "tel:*412*" : "tel:*102*";
+        String dial = prefix + ocrResult.trim().toString() + "%23";
         Intent dialIntent = new Intent(Intent.ACTION_CALL);
         dialIntent.setData(Uri.parse(dial));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -148,6 +143,7 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         haptics = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         ocrResultTV = (EditText) findViewById(R.id.ocrResult);
         rechargeImView = (ImageView) findViewById(R.id.imageView2);
+        pinNumber = (TextView) findViewById(R.id.pinNumber);
         rechargeBtn.setOnClickListener(this);
         redoButton.setOnClickListener(this);
         new MyTask().execute();
@@ -168,6 +164,14 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             ocrResultTV.setVisibility(View.VISIBLE);
             rechargeImView.setImageBitmap(thresholdedImage);
             ocrResultTV.setText(ocrResult.trim());
+            int number = (ocrResultTV.getText().length());
+            if (number == 16){
+                pinNumber.setTextColor(Color.GREEN);
+                pinNumber.setText(String.valueOf(number));
+            } else{
+                pinNumber.setTextColor(Color.RED);
+                pinNumber.setText(String.valueOf(number) + "!");
+            }
         }
 
         public void processImage() {

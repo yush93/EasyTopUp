@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.design.widget.TabLayout;
+
 import com.aayush.scanandtopup.R;
 
 public class Help extends AppCompatActivity{
@@ -28,6 +29,7 @@ public class Help extends AppCompatActivity{
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
     }
 
     /////////////////////Fragments or tabs are displayed from here
