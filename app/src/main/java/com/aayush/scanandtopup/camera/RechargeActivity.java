@@ -76,9 +76,9 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         Bitmap originalBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         Matrix matrix = new Matrix();
         //Edited here to rotate.........................
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            matrix.postRotate(-90);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            matrix.postRotate(-90);
+//        }
         //..................
         croppedImage = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         instantiate();
@@ -244,7 +244,6 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
                 imageWriter.writeImage(bitmap, false, "segment" + counter++, "07_binarysegment");
             }
         }
-
 
         private int[] createPixelArray(int width, int height, Bitmap thresholdImage) {
             int[] pixels = new int[width * height];
