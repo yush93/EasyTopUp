@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    tools:context="com.aayush.scanandtopup.maininterfaces.History">
+    tools:context="com.aayush.scanandtopup.primaryGUIModule.History">
 
     <ListView
         android:layout_width="match_parent"

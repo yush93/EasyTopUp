@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".extras.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Easy Top Up"
             android:screenOrientation="portrait"
@@ -36,35 +36,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".maininterfaces.Splash"
+            android:name=".primaryGUIModule.Splash"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".maininterfaces.MainActivity"
+            android:name=".primaryGUIModule.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".maininterfaces.BalanceTransferActivity"
+            android:name=".primaryGUIModule.BalanceTransferActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Base.V7.Theme.AppCompat.Light" />
         <activity
-            android:name=".camera.CameraAccess"
+            android:name=".imageAcquisitionModule.Camera"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".camera.CropActivity"
+            android:name=".imageAcquisitionModule.CropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".camera.RechargeActivity"
+            android:name=".primaryGUIModule.RechargeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".extras.About"
+            android:name=".primaryGUIModule.About"
             android:theme="@style/Base.V7.Theme.AppCompat" />
         <activity
-            android:name=".extras.Help"
+            android:name=".primaryGUIModule.Help"
             android:label="Help"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".maininterfaces.History"
+            android:name=".primaryGUIModule.History"
             android:label="History"
             android:theme="@style/Base.V7.Theme.AppCompat.Light" />
     </application>

@@ -5,7 +5,7 @@
     android:id="@+id/cameraLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aayush.scanandtopup.camera.CameraAccess">
+    tools:context="com.aayush.scanandtopup.imageAcquisitionModule.Camera">
 
     <RelativeLayout
         android:id="@+id/top"
@@ -22,7 +22,7 @@
             android:layout_alignParentStart="true"/>
 
 
-        <com.aayush.scanandtopup.camera.CameraOverlay
+        <com.aayush.scanandtopup.imageAcquisitionModule.CameraOverlay
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/overlay" />

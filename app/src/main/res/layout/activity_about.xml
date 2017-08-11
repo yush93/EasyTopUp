@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.aayush.scanandtopup.extras.About">
+    tools:context="com.aayush.scanandtopup.primaryGUIModule.About">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
