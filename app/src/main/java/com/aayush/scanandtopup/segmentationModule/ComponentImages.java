@@ -7,23 +7,15 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 
-//import android.util.Log;
-
-/**
- * Created by mandy on 7/12/16.
- */
 public class ComponentImages {
     Context context;
     public ComponentImages(Context context) {
         this.context = context;
-
     }
-
 
     private void SortByX(ArrayList<int[][]> componentArrayList) {
         int[][] temp;
         boolean swapped;
-
         int len = componentArrayList.size();
         for (int u = 0; u < len - 1; u++) {
             swapped = false;
@@ -39,28 +31,21 @@ public class ComponentImages {
             }
         }
 
-
-
-    public int ComponentHeight(int[][] componentArray)
-    {
+    public int ComponentHeight(int[][] componentArray) {
         int minY = MinXY(componentArray)[1];
         int maxY = MaxXY(componentArray)[1];
         return maxY-minY+1;
     }
 
-
     public void HeightSorting(int[][][] componentArray) {
-
         int[][] temp;
         boolean swapped;
         int len = componentArray.length;
         for (int u = 0; u < len - 1; u++) {
             swapped = false;
             for (int v = 0; v < len - 1 - u; v++) {
-
                 int h1 = ComponentHeight(componentArray[v]);
                 int h2 = ComponentHeight(componentArray[v+1]);
-
                 if ((h1) > (h2)) {
                     temp = componentArray[v];
                     componentArray[v] = componentArray[v + 1];
@@ -76,22 +61,17 @@ public class ComponentImages {
     public ArrayList<ArrayList<int[][]>> Clustering(int[][][] componentArray) {
         ArrayList<ArrayList<int[][]>> componentClusters = new ArrayList<>();
         ArrayList<int[][]> temp;
-        for (int i =0; i < componentArray.length; i++)
-        {
+        for (int i =0; i < componentArray.length; i++){
             if(componentClusters.size() == 0)
             {
                 temp = new ArrayList<>();
                 temp.add(componentArray[i]);
                 componentClusters.add(temp);
-            }
-            else
-            {
+            } else {
                 ArrayList<int[][]> lastArrayList = componentClusters.get(componentClusters.size()-1);
-                if(ComponentHeight(componentArray[i]) - ComponentHeight(lastArrayList.get(lastArrayList.size()-1)) <= 7)
-                {
+                if(ComponentHeight(componentArray[i]) - ComponentHeight(lastArrayList.get(lastArrayList.size()-1)) <= 7) {
                     lastArrayList.add(componentArray[i]);
-                }
-                else {
+                } else {
                     temp = new ArrayList<>();
                     temp.add(componentArray[i]);
                     componentClusters.add(temp);
@@ -103,7 +83,6 @@ public class ComponentImages {
         }
 
         return componentClusters;
-
     }
 
     private static int[] MaxXY(int[][] componentPixels) {
@@ -117,7 +96,6 @@ public class ComponentImages {
         maxXY[0] = maxX;
         maxXY[1] = maxY;
         return maxXY;
-
     }
 
     private static int[] MinXY(int[][] componentPixels) {
@@ -131,7 +109,6 @@ public class ComponentImages {
         minXY[0] = minX;
         minXY[1] = minY;
         return minXY;
-
     }
 
     public ArrayList<Bitmap> CreateComponentImages(int[][][] componentArray) {
@@ -140,8 +117,6 @@ public class ComponentImages {
         HeightSorting(componentArray);
         ArrayList<int[][]> componentArrayList  = Variance.CheckVarianceInClusters(Clustering(componentArray));
         SortByX(componentArrayList);
-//        Log.i("Components" , ""+ componentArray.length);
-//        Log.i("sortedComponents" , "" + componentArrayList.size());
         for (int component = 0; component < componentArrayList.size(); component++) {
             int minX = MinXY(componentArrayList.get(component))[0];
             int minY = MinXY(componentArrayList.get(component))[1];
@@ -149,9 +124,6 @@ public class ComponentImages {
             int maxY = MaxXY(componentArrayList.get(component))[1];
             int componentHeight = maxY - minY + 1;
             int componentWidth = maxX - minX + 1;
-
-
-
             Bitmap componentSegment = Bitmap.createBitmap(componentWidth, componentHeight, Bitmap.Config.RGB_565);
             Canvas c = new Canvas(componentSegment);
             c.drawColor(Color.WHITE);
@@ -163,15 +135,7 @@ public class ComponentImages {
                 componentSegment.setPixel(x, y, Color.BLACK);
             }
             bitmapArrayList.add(componentSegment);
-//            ImageWriter imageWriter= new ImageWriter(context);
-
-//            imageWriter.writeImage(componentSegment, true, "aftersegment", "06_segmentation");
         }
-
-//        System.out.println(bitmapArrayList.size());
-        return bitmapArrayList;
+       return bitmapArrayList;
     }
-
-
-
 }

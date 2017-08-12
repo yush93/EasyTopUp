@@ -25,7 +25,7 @@ public class BalanceTransferActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
     private Uri uriContact;
     private String contactID; // contacts unique ID
-    String carrier;
+    String carrier = MainActivity.getSimInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +107,12 @@ public class BalanceTransferActivity extends AppCompatActivity {
     public void btnTransfer_Clicked(View v) {
         String contact, code, amount;
         String ussd = null;
-        if(carrier.equals("NTC Transfer")){
+        if(carrier.equals("NTC Balance Transfer")){
             contact = textContact.getText().toString();
             code = textCode.getText().toString();
             amount = textAmount.getText().toString();
             ussd = "tel:*422*" + code + "*" + contact + "*" + amount + "%23";
-        } else if(carrier.equals("NCell Transfer")){
+        } else if(carrier.equals("NCell Balance Transfer")){
             //*17122*<Type receiver's mobile number>*<Type transfer amount>#.
             contact = textContact.getText().toString();
             amount = textAmount.getText().toString();

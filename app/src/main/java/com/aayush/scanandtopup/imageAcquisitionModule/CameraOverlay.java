@@ -59,7 +59,6 @@ public class CameraOverlay extends View {
         left = parentWidth / WIDTH_OFFSET;
         top = parentHeight / HEIGHT_OFFSET;
         right = 6*parentWidth / WIDTH_OFFSET;
-//        bottom = (parentHeight / HEIGHT_OFFSET) + 65;
         bottom = (2 * (parentHeight / HEIGHT_OFFSET));
     }
 

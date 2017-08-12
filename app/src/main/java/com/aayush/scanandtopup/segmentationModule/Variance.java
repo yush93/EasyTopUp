@@ -4,10 +4,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-
-/**
- * Created by mandy on 8/10/16.
- */
 public class Variance {
 
     private static double CalculateMean(ArrayList<Integer> minY) {
@@ -16,7 +12,6 @@ public class Variance {
         for (int i = 0; i < len; i++) {
             sum += minY.get(i);
         }
-
         return sum / len;
     }
 
@@ -27,10 +22,7 @@ public class Variance {
         for (int i = 0; i < len; i++) {
             sum += (minY.get(i) - valuesMean) * (minY.get(i) - valuesMean);
         }
-
         return sum / len;
-
-
     }
 
     private static int MinY(int[][] componentPixels) {
@@ -42,7 +34,6 @@ public class Variance {
         return minY;
     }
 
-
     private static void VarianceSorting(ArrayList<ArrayList<int[][]>> clusterArrayList, int len) {
         System.out.println("Arraylist sorting by variance");
         ArrayList<int[][]> temp;
@@ -53,8 +44,7 @@ public class Variance {
                 ArrayList<Integer> minY1, minY2;
                 minY1 = new ArrayList<>();
                 minY2 = new ArrayList<>();
-                for (int c1 = 0; c1 < clusterArrayList.get(v).size(); c1++)
-                {
+                for (int c1 = 0; c1 < clusterArrayList.get(v).size(); c1++) {
                     minY1.add(MinY(clusterArrayList.get(v).get(c1)));
                 }
                 for (int c2 = 0; c2 < clusterArrayList.get(v + 1).size(); c2++) {
@@ -71,7 +61,6 @@ public class Variance {
             }
             if (!swapped) break;
         }
-
     }
 
     public static ArrayList<int[][]> CheckVarianceInClusters(ArrayList<ArrayList<int[][]>> clusterArrayList) {
@@ -89,7 +78,6 @@ public class Variance {
         {
             Log.d("variance", "" + ++count + ":"+ i);
         }
-
         for (int i = 0; i < clusterArrayList.size(); i++) {
             if (clusterArrayList.get(i).size() >= 12 && clusterArrayList.get(i).size() <= 18) {
 
