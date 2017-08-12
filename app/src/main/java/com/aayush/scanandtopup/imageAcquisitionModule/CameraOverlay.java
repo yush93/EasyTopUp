@@ -20,7 +20,7 @@ public class CameraOverlay extends View {
 //    private final int WIDTH_OFFSET = 7;
 //    private final int HEIGHT_OFFSET = 2;
 
-    private final int WIDTH_OFFSET = 10;
+    private final int WIDTH_OFFSET = 7;
     private final int HEIGHT_OFFSET = 6;
     private static int parentWidth,parentHeight,top,bottom,left,right;
 
@@ -58,7 +58,7 @@ public class CameraOverlay extends View {
     private void init() {
         left = parentWidth / WIDTH_OFFSET;
         top = parentHeight / HEIGHT_OFFSET;
-        right = 9*parentWidth / WIDTH_OFFSET;
+        right = 6*parentWidth / WIDTH_OFFSET;
 //        bottom = (parentHeight / HEIGHT_OFFSET) + 65;
         bottom = (2 * (parentHeight / HEIGHT_OFFSET));
     }

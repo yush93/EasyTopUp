@@ -80,7 +80,6 @@ public class CropActivity extends Activity implements View.OnClickListener, View
             public void onGlobalLayout() {
                 Coordinates imageLocation = new ImageLocatorInImageview(cropImView);
                 imageCoordinates = imageLocation.getCoordinates();
-                //clippingWindow = new ClippingWindow(getApplicationContext(), imageCoordinates);
                 clippingWindow.initializeBoundary(imageCoordinates);
             }
         });

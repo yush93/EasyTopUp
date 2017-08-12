@@ -58,7 +58,6 @@ public class NNMatrix {
         NNMatrix A = new NNMatrix(M, N);
         for (int i = 0; i < M; i++)
             for (int j = 0; j < N; j++)
-                //this.data[i][j] =1.0/(1+Math.exp(-this.data[i][j]));
                 A.data[i][j] = 1.0 / (1 + Math.exp(-this.data[i][j]));
         return A;
     }

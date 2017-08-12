@@ -29,7 +29,6 @@ public class Camera extends Activity implements SurfaceHolder.Callback, View.OnC
     private SurfaceView surfaceView;
     private final String simInfo = MainActivity.getSimInfo();
     private boolean isPreviewing = false;
-    private RelativeLayout animateView;
     private android.support.design.widget.FloatingActionButton takePicture;
     private TextView simInfoView;
     private int cameraId;

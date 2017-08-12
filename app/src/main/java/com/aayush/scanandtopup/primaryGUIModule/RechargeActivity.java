@@ -20,7 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.aayush.scanandtopup.helperModule.DatabaseHelper;
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.classifierModule.NNMatrix;
@@ -39,16 +38,12 @@ import com.aayush.scanandtopup.segmentationModule.BinaryArray;
 import com.aayush.scanandtopup.segmentationModule.CcLabeling;
 import com.aayush.scanandtopup.segmentationModule.ComponentImages;
 import com.aayush.scanandtopup.segmentationModule.PrepareImage;
-
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class RechargeActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
-    private static final String TAG = "RechargeActivity";
     DatabaseHelper mDatabaseHelper;
     private ImageButton rechargeBtn, redoButton;
     private EditText ocrResultTV;

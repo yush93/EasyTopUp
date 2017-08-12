@@ -13,7 +13,7 @@ public class NeuralNetwork {
 
     public NNMatrix FeedForward(NNMatrix a) {
         a = ((this.weights_at_layer2.times(a)).plus(this.biases_at_layer2)).sigmoid();
-        a= ((this.weights_at_layer3.times(a)).plus(this.biases_at_layer3)).sigmoid();
+        a = ((this.weights_at_layer3.times(a)).plus(this.biases_at_layer3)).sigmoid();
         return a;
     }
 }
