@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class JsonContentReader {
+public class JsonReader {
     public String getJsonString(Context context) {
         StringBuilder jsonContent = new StringBuilder();
         try {

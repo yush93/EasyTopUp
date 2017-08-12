@@ -9,7 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
-import com.aayush.scanandtopup.classifierModule.JsonContentReader;
+import com.aayush.scanandtopup.classifierModule.JsonReader;
 import com.aayush.scanandtopup.classifierModule.NNMatrix;
 import com.aayush.scanandtopup.classifierModule.WeightReader;
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class Splash extends AppCompatActivity {
     }
 
     private void loadData() {
-        JsonContentReader jsonContentReader = new JsonContentReader();
+        JsonReader jsonContentReader = new JsonReader();
         String jsonContent = jsonContentReader.getJsonString(getApplicationContext());
         WeightReader weightReader = new WeightReader();
         bias_at_layer2 = new NNMatrix(weightReader.getWeights(jsonContent, "layer_1_bias"));
