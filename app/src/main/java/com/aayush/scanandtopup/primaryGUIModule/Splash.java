@@ -94,7 +94,6 @@ public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(this, "Inside Splash", Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
         if (!permissionRequest()) {
             loadData();
