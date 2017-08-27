@@ -8,13 +8,13 @@
     tools:context="com.aayush.scanandtopup.imageAcquisitionModule.CropActivity">
 
 
+
     <RelativeLayout
         android:id="@+id/relativeLayout0"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_layout_height"
         android:layout_alignParentBottom="true"
         android:background="@color/darkTheme">
-
 
         <ImageButton
             android:id="@+id/redoFromCrop"

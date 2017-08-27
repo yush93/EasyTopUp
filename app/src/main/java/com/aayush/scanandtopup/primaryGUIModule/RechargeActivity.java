@@ -20,10 +20,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.aayush.scanandtopup.helperModule.DatabaseHelper;
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.classifierModule.NNMatrix;
 import com.aayush.scanandtopup.classifierModule.NeuralNetwork;
+import com.aayush.scanandtopup.imageAcquisitionModule.CropActivity;
 import com.aayush.scanandtopup.interfaceModule.GrayScale;
 import com.aayush.scanandtopup.interfaceModule.Rotate;
 import com.aayush.scanandtopup.interfaceModule.SkewChecker;
@@ -38,8 +40,10 @@ import com.aayush.scanandtopup.segmentationModule.BinaryArray;
 import com.aayush.scanandtopup.segmentationModule.CcLabeling;
 import com.aayush.scanandtopup.segmentationModule.ComponentImages;
 import com.aayush.scanandtopup.segmentationModule.PrepareImage;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +65,7 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
     private String ocrResult;
     private ImageWriter imageWriter;
     private TextView pinNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,10 +165,10 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             rechargeImView.setImageBitmap(thresholdedImage);
             ocrResultTV.setText(ocrResult.trim());
             int number = (ocrResultTV.getText().length());
-            if (number == 16){
+            if (number == 16) {
                 pinNumber.setTextColor(Color.GREEN);
                 pinNumber.setText(String.valueOf(number));
-            } else{
+            } else {
                 pinNumber.setTextColor(Color.RED);
                 pinNumber.setText(String.valueOf(number) + "!");
             }
@@ -174,6 +179,8 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             bmResult = grayScale(bmResult);
             bmResult = skewCorrect(bmResult);
             bmResult = threshold(bmResult);
+            pixelCount(bmResult);
+
             thresholdedImage = bmResult;
             componentBitmaps = getSegmentArray(bmResult);
             List<double[][]> binarySegmentList = BinaryArray.CreateBinaryArray(componentBitmaps);
@@ -206,25 +213,45 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             return bmp;
         }
 
+        public void pixelCount(Bitmap bmp){
+            bmp = PrepareImage.addBackgroundPixels(bmp);
+            int height = bmp.getHeight();
+            int width = bmp.getWidth();
+            int Size = width * height;
+            int[] pixels = createPixelArray(width, height, bmp);
+            int blackCount = 0;
+            for (int pixel : pixels) {
+                if (pixel == BLACK) {
+                    blackCount++;
+                }
+            }
+            if(blackCount > Size - blackCount)
+                invert();
+        }
+
         private ArrayList<Bitmap> getSegmentArray(Bitmap bmp) {
             ArrayList<Bitmap> segments;
             bmp = PrepareImage.addBackgroundPixels(bmp);
             int height = bmp.getHeight();
             int width = bmp.getWidth();
+            int Size = width * height;
             int[] pixels = createPixelArray(width, height, bmp);
-            boolean[] booleanImage = new boolean[width * height];
+            boolean[] booleanImage = new boolean[Size];
             int index = 0;
+            int blackCount = 0;
             for (int pixel : pixels) {
                 if (pixel == BLACK) {
                     booleanImage[index] = true;
                 }
                 index++;
             }
+
             CcLabeling ccLabeling = new CcLabeling();
             ComponentImages componentImages = new ComponentImages(RechargeActivity.this);
             segments = componentImages.CreateComponentImages(ccLabeling.CcLabels(booleanImage, width));
             return segments;
         }
+
 
         private void generateBinarySegmentedImages() {
             List<int[]> binarySegmentList1D = BinaryArray.CreateBinaryArrayOneD(componentBitmaps);
@@ -263,5 +290,19 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             }
             return ocrString;
         }
+    }
+
+    public void invert(){
+        int length = bmResult.getWidth() * bmResult.getHeight();
+        int[] array = new int[length];
+        bmResult.getPixels(array, 0, bmResult.getWidth(), 0, 0, bmResult.getWidth(), bmResult.getHeight());
+        for (int i = 0; i < length; i++) {
+            if (array[i] == 0xff000000) {
+                array[i] = 0xffffffff;
+            } else if (array[i] == 0xffffffff) {
+                array[i] = 0xff000000;
+            }
+        }
+        bmResult.setPixels(array, 0, bmResult.getWidth(), 0, 0, bmResult.getWidth(), bmResult.getHeight());
     }
 }

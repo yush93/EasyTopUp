@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.aayush.scanandtopup.R;
 import com.aayush.scanandtopup.interfaceModule.Coordinates;
 import com.aayush.scanandtopup.primaryGUIModule.RechargeActivity;
@@ -20,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 
 public class CropActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
     private ImageView cropImView;
+    private Switch invertToggle;
     private ClippingWindow clippingWindow;
     private Vibrator haptics;
     private final int HAPTICS_CONSTANT = 50;
@@ -83,6 +88,7 @@ public class CropActivity extends Activity implements View.OnClickListener, View
                 clippingWindow.initializeBoundary(imageCoordinates);
             }
         });
+
     }
 
     private void crop() {
