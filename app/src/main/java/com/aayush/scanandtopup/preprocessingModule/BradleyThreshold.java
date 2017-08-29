@@ -9,7 +9,7 @@ public class BradleyThreshold implements Threshold {
     private int sourceImageWidth;
     private int sourceImageHeight;
     private final int MASKER = 0xFF;
-    private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;
+    private final float PIXEL_BRIGHTNESS_DIFF_LIMIT = 0.15F;//0.15F;
     private final float PIXEL_BRIGHTNESS_MAX = 1.0F;
     private final int THRESHOLD_BLACK = 0x00;
     private final int THRESHOLD_WHITE = 0xFFFFFF;
@@ -17,7 +17,7 @@ public class BradleyThreshold implements Threshold {
     private final int startX = 0;
     private final int startY = 0;
     private final int offSet = 0;
-    private final String simInfo = MainActivity.getSimInfo();
+
 
     int currentPixel;
     int previousPixel;
@@ -27,38 +27,6 @@ public class BradleyThreshold implements Threshold {
     int positiveXValue;
     int negativeYValue;
     int positiveYValue;
-
-    public void setNegativeXValue(int negativeXValue) {
-        this.negativeXValue = negativeXValue;
-    }
-
-    public void setNegativeYValue(int negativeYValue) {
-        this.negativeYValue = negativeYValue;
-    }
-
-    public void setPositiveXValue(int positiveXValue) {
-        this.positiveXValue = positiveXValue;
-    }
-
-    public void setPositiveYValue(int positiveYValue) {
-        this.positiveYValue = positiveYValue;
-    }
-
-    public int getNegativeXValue() {
-        return negativeXValue;
-    }
-
-    public int getNegativeYValue() {
-        return negativeYValue;
-    }
-
-    public int getPositiveXValue() {
-        return positiveXValue;
-    }
-
-    public int getPositiveYValue() {
-        return positiveYValue;
-    }
 
     private int[] createIntegralImage(int[] pixels) {
         int sumofRow;
@@ -146,10 +114,8 @@ public class BradleyThreshold implements Threshold {
                 sumOfFramePixels = getSumOfFramePixels(integralImage);
                 if (((pixels[currentPixel] & MASKER) * noPixelInFrame) < (sumOfFramePixels * (PIXEL_BRIGHTNESS_MAX - PIXEL_BRIGHTNESS_DIFF_LIMIT))) {
                     pixels[currentPixel] = THRESHOLD_BLACK;
-                    //blackPixelCounter++;
                 } else {
                     pixels[currentPixel] = THRESHOLD_WHITE;
-                    //whitePixelCounter++;
                 }
             }
         }

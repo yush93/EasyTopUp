@@ -31,6 +31,7 @@ import com.aayush.scanandtopup.interfaceModule.Rotate;
 import com.aayush.scanandtopup.interfaceModule.SkewChecker;
 import com.aayush.scanandtopup.interfaceModule.Threshold;
 import com.aayush.scanandtopup.preprocessingModule.BradleyThreshold;
+import com.aayush.scanandtopup.preprocessingModule.Dilate;
 import com.aayush.scanandtopup.preprocessingModule.GammaCorrection;
 import com.aayush.scanandtopup.preprocessingModule.HoughLineSkewChecker;
 import com.aayush.scanandtopup.preprocessingModule.ITURGrayScale;
@@ -180,7 +181,6 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             bmResult = skewCorrect(bmResult);
             bmResult = threshold(bmResult);
             pixelCount(bmResult);
-
             thresholdedImage = bmResult;
             componentBitmaps = getSegmentArray(bmResult);
             List<double[][]> binarySegmentList = BinaryArray.CreateBinaryArray(componentBitmaps);
@@ -215,10 +215,8 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
 
         public void pixelCount(Bitmap bmp){
             bmp = PrepareImage.addBackgroundPixels(bmp);
-            int height = bmp.getHeight();
-            int width = bmp.getWidth();
-            int Size = width * height;
-            int[] pixels = createPixelArray(width, height, bmp);
+            int Size = bmp.getWidth() * bmp.getHeight();
+            int[] pixels = createPixelArray(bmp.getWidth(), bmp.getHeight(), bmp);
             int blackCount = 0;
             for (int pixel : pixels) {
                 if (pixel == BLACK) {
@@ -238,14 +236,12 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             int[] pixels = createPixelArray(width, height, bmp);
             boolean[] booleanImage = new boolean[Size];
             int index = 0;
-            int blackCount = 0;
             for (int pixel : pixels) {
                 if (pixel == BLACK) {
                     booleanImage[index] = true;
                 }
                 index++;
             }
-
             CcLabeling ccLabeling = new CcLabeling();
             ComponentImages componentImages = new ComponentImages(RechargeActivity.this);
             segments = componentImages.CreateComponentImages(ccLabeling.CcLabels(booleanImage, width));
@@ -304,5 +300,8 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         bmResult.setPixels(array, 0, bmResult.getWidth(), 0, 0, bmResult.getWidth(), bmResult.getHeight());
+
+        Dilate dilate = new Dilate();
+        bmResult = dilate.dilate(bmResult);
     }
 }
